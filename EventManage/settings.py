@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = ['http://x23267801eventmanage-env.eba-mjzk6wax.eu-west-1.elasticbeanstalk.com/', 'https://f40282f4e1ff45eabbf4b87056a72cb1.vfs.cloud9.eu-west-1.amazonaws.com/']
 
 # Application definition
 
