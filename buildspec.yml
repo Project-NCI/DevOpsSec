@@ -1,4 +1,5 @@
 version: 0.2
+
 phases:
   install:
     runtime-versions:
@@ -12,17 +13,6 @@ phases:
       - python --version
       - pylint $CODEBUILD_SRC_DIR/*.py
       - pylint $CODEBUILD_SRC_DIR/EventManage/*.py
-      - curl -sSLo sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
-      - unzip sonar-scanner.zip -d $HOME/sonar-scanner
-      - export PATH="$HOME/sonar-scanner/sonar-scanner-4.8.0.2856-linux/bin:$PATH"
-
-  build:
-    commands:
-      - sonar-scanner -Dsonar.projectKey=Project-NCI_DevOpsSec \
-                      -Dsonar.organization=project-nci \
-                      -Dsonar.sources=. \
-                      -Dsonar.host.url=https://sonarcloud.io \
-                      -Dsonar.login=7a56612e0f33b5b8ba54ad446ffb7b4451d3b5c9
 
 artifacts:
   files:
