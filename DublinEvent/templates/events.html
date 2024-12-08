@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-md-12">
                 {% for event in events %}
-                <form method=POST action="{% url 'eventregistration' event.id %}">
+                <form method=POST action="{% url 'eventregister' event.id %}">
                 {% csrf_token %}
                 <div style="padding: 10px;">
                     <div class="d-flex justify-content-center align-items-lg-center" style="padding: 10px;box-shadow: 0px 0px 4px rgba(33,37,41,0.2);border-radius: 10px;background: #ffffff;">

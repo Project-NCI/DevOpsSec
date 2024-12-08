@@ -5,7 +5,8 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
-from .models import Event
+from .models import Event, EventRegistration
+from .forms import EventRegistrationForm
 
 def index(request):
     return render(request, 'index.html')
@@ -70,10 +71,26 @@ def eventlist(request):
     events = Event.objects.all()
     return render(request, 'events.html', {'events': events})
 
-'''def eventregistration(request, event_id):
+@login_required
+def eventregister(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     
     if EventRegistration.objects.filter(user=request.user, event=event).exists():
         return HttpResponseRedirect(reverse('event_list'))
+        
+    events = Event.objects.filter(id=event_id)
+        
+    if request.method == 'POST':
+        form = EventRegistrationForm(request.POST)
+        if form.is_valid():
+            EventRegistration.objects.create(
+                user=request.user,
+                event=event,
+                mobile_no=form.cleaned_data['mobile_no'],
+                address=form.cleaned_data['address']
+            )
+            return redirect('profile')
     
-    return render(request, 'eventinfo.html')'''
+    form = EventRegistrationForm()
+    
+    return render(request, 'eventinfo.html', {'form': form, 'events': events})
