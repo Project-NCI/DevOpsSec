@@ -1,0 +1,25 @@
+version: 0.2
+ 
+phases:
+  install:
+    runtime-versions:
+      java: openjdk11
+    commands:
+      - curl -o sonar-scanner-cli.zip -L https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856.zip
+      - unzip sonar-scanner-cli.zip -d /usr/local/
+      - export PATH=$PATH:/usr/local/sonar-scanner-4.8.0.2856/bin
+  pre_build:
+    commands:
+      - echo "Running Pylint..."
+      - pylint $CODEBUILD_SRC_DIR/*.py || true
+  build:
+    commands:
+      - echo "Running SonarQube Analysis..."
+      - sonar-scanner \
+          -Dsonar.projectKey=$SONAR_PROJECT_KEY \
+          -Dsonar.sources=. \
+          -Dsonar.host.url=https://your-sonarqube-server.com \
+          -Dsonar.login=$SONAR_TOKEN
+artifacts:
+  files:
+    - '**/*'
