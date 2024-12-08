@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['http://x23267801eventmanage-env.eba-mjzk6wax.eu-west-1.elasticbeanstalk.com/', 'https://f40282f4e1ff45eabbf4b87056a72cb1.vfs.cloud9.eu-west-1.amazonaws.com/']
+CSRF_TRUSTED_ORIGINS = ['http://x23267801eventmanage-env.eba-mjzk6wax.eu-west-1.elasticbeanstalk.com/', 'https://f40282f4e1ff45eabbf4b87056a72cb1.vfs.cloud9.eu-west-1.amazonaws.com']
 
 # Application definition
 
@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'DublinEvent',
 ]
+
+SESSION_COOKIE_AGE = 86400
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -119,9 +121,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-#STATICFILES_DIRS = [
-#    BASE_DIR / "static",
-#]
+'''STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]'''
 
 STATIC_ROOT = "static"
 

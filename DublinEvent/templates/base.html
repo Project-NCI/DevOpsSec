@@ -29,7 +29,12 @@
                     </ul>
                     <div class="d-md-none my-2"><button class="btn btn-light me-2" type="button">Button</button><button class="btn btn-primary" type="button">Button</button></div>
                 </div>
-                <div class="d-none d-md-block"><button class="btn btn-light me-2" type="button" style="font-family: Poppins, sans-serif;">Log In</button><a class="btn btn-primary" role="button" href="#" style="font-family: Poppins, sans-serif;">Sign Up</a></div>
+                {% if request.session.user %}
+                <span>Hello, {{ request.session.user }}</span>
+                {% else %}
+                <div class="d-none d-md-block"><a class="btn btn-light me-2" role="button" href="{% url 'login_page' %}" style="font-family: Poppins, sans-serif;">Log In</a>
+                <a class="btn btn-primary" role="button" href="{% url 'login_page' %}" style="font-family: Poppins, sans-serif;">Sign Up</a></div>
+                {% endif %}
             </div>
         </nav>
     </header>
