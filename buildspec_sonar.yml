@@ -30,6 +30,7 @@ phases:
       - response_code=$(curl -s -o /dev/null -w "%{http_code}" "https://sonarcloud.io/api/qualitygates/project_status?projectKey=$PROJECTKEY")
       - if [ "$response_code" -ne 200 ]; then
           echo "Quality Gate check failed with HTTP code $response_code";
+          echo "Proj:$PROJECTKEY"
           exit 1;
         fi
  
