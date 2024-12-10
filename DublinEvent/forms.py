@@ -4,7 +4,7 @@ from .models import Event, EventRegistration
 class EventRegistrationForm(forms.ModelForm):
     class Meta:
         model = EventRegistration
-        fields = ['mobile_no', 'address']  # Include only the mobile number and address fields
+        fields = ['mobile_no', 'address']
         widgets = {
             'mobile_no': forms.TextInput(attrs={
                 'class': 'form-control',
