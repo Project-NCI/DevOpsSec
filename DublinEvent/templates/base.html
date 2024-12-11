@@ -31,14 +31,14 @@
                     <div class="d-md-none my-2"><button class="btn btn-light me-2" type="button">Button</button><button class="btn btn-primary" type="button">Button</button></div>
                 </div>
                 {% if request.session.user %}
-                <div class="d-none d-md-block"><a class="btn btn-light me-2" role="button" href="{% url 'profile' %}" style="font-family: Poppins, sans-serif;">Profile</a>
-                <a class="btn btn-primary" role="button" href="{% url 'logout_view' %}" style="font-family: Poppins, sans-serif;">Log Out</a></div>
+                <div class="d-none d-md-block"><a class="btn btn-light me-2" role="button" href="{% url 'profile' %}" style="font-family: Poppins, sans-serif;" onKeyDown="return false;">Profile</a>
+                <a class="btn btn-primary" role="button" href="{% url 'logout_view' %}" style="font-family: Poppins, sans-serif;" onKeyDown="return false;">Log Out</a></div>
                 {% elif request.user.is_staff %}
-                <div class="d-none d-md-block"><a class="btn btn-light me-2" role="button" href="{% url 'profile' %}" style="font-family: Poppins, sans-serif;">Profile</a>
-                <a class="btn btn-primary" role="button" href="{% url 'logout_view' %}" style="font-family: Poppins, sans-serif;">Log Out</a></div>
+                <div class="d-none d-md-block"><a class="btn btn-light me-2" role="button" href="{% url 'profile' %}" style="font-family: Poppins, sans-serif;" onKeyDown="return false;">Profile</a>
+                <a class="btn btn-primary" role="button" href="{% url 'logout_view' %}" style="font-family: Poppins, sans-serif;" onKeyDown="return false;">Log Out</a></div>
                 {% else %}
-                <div class="d-none d-md-block"><a class="btn btn-light me-2" role="button" href="{% url 'login_page' %}" style="font-family: Poppins, sans-serif;">Log In</a>
-                <a class="btn btn-primary" role="button" href="{% url 'login_page' %}" style="font-family: Poppins, sans-serif;">Sign Up</a></div>
+                <div class="d-none d-md-block"><a class="btn btn-light me-2" role="button" href="{% url 'login_page' %}" style="font-family: Poppins, sans-serif;" onKeyDown="return false;">Log In</a>
+                <a class="btn btn-primary" role="button" href="{% url 'login_page' %}" style="font-family: Poppins, sans-serif;" onKeyDown="return false;">Sign Up</a></div>
                 {% endif %}
             </div>
         </nav>
