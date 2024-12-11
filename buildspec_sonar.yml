@@ -29,7 +29,8 @@ phases:
       - mvn sonar:sonar -Dsonar.login=$SONARCLOUD_TOKEN -Dsonar.host.url=$HOST -Dsonar.projectKey=$PROJECTKEY -Dsonar.organization=$SONARCLOUD_ORG
       - sleep 5
       - response_code=$(curl -s -o /dev/null -w "%{http_code}" "https://sonarcloud.io/api/qualitygates/project_status?projectKey=$PROJECTKEY")
-      - if [ "$response_code" -ne 200 ]; then
+      - |
+        if [ "$response_code" -ne 200 ]; then
           echo "Quality Gate check failed with HTTP code $response_code";
           echo "Project Key: $PROJECTKEY";
           exit 1;
