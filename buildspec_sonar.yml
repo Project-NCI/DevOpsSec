@@ -1,11 +1,11 @@
 version: 0.2
 env:
-  variables:
-    SONARCLOUD_TOKEN: a52ea9c04ddc5718719a477dded1067f836d37eb
-    PROJECTKEY: Project-NCI_DevOpsSec
-    SONARCLOUD_ORG: project-nci
-    HOST: https://sonarcloud.io
-
+  secrets-manager:
+    SONARCLOUD_TOKEN: x23267801_SonarCred:SONAR_TOKEN
+    PROJECTKEY: x23267801_SonarCred:SONAR_PROJECT_KEY
+    SONARCLOUD_ORG: x23267801_SonarCred:SONAR_ORG_KEY
+    HOST: x23267801_SonarCred:HOST
+    
 phases:
   install:
     runtime-versions:
@@ -13,29 +13,26 @@ phases:
     commands:
       - yum update -y
       - yum install -y jq
-      - wget https://archive.apache.org/dist/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
-      - tar xzf apache-maven-3.8.6-bin.tar.gz
-      - mv apache-maven-3.8.6 /opt/maven
-      - export PATH=$PATH:/opt/maven/bin
+      - retry_count=3
+      - for i in $(seq 1 $retry_count); do wget https://archive.apache.org/dist/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz && break || sleep 10; done
+      - tar xzf apache-maven-3.8.6-bin.tar.gz || true
+      - ln -s apache-maven-3.8.6 maven
       - wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
-      - unzip sonar-scanner-cli-4.8.0.2856-linux.zip
-      - mv sonar-scanner-4.8.0.2856-linux /opt/sonar-scanner
-      - export PATH=$PATH:/opt/sonar-scanner/bin/
-
+      - unzip ./sonar-scanner-cli-4.8.0.2856-linux.zip
+      - mv sonar-scanner-4.8.0.2856-linux /sonar-scanner
+      - export PATH=$PATH:/sonar-scanner/bin/
+ 
   build:
     commands:
       - find / -name pom.xml -exec mv {} ./pom.xml \; || true
-      - mvn clean install
       - mvn sonar:sonar -Dsonar.login=$SONARCLOUD_TOKEN -Dsonar.host.url=$HOST -Dsonar.projectKey=$PROJECTKEY -Dsonar.organization=$SONARCLOUD_ORG
       - sleep 5
       - response_code=$(curl -s -o /dev/null -w "%{http_code}" "https://sonarcloud.io/api/qualitygates/project_status?projectKey=$PROJECTKEY")
-      - |
-        if [ "$response_code" -ne 200 ]; then
+      - if [ "$response_code" -ne 200 ]; then
           echo "Quality Gate check failed with HTTP code $response_code";
-          echo "Project Key: $PROJECTKEY";
           exit 1;
         fi
-
+ 
 artifacts:
   files:
     - 'target/*.jar'
