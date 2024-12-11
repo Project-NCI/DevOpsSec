@@ -1,9 +1,6 @@
-import os, boto3, uuid
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
-from django.urls import reverse
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
@@ -31,7 +28,6 @@ def login_page(request):
             
         else:
             return render(request, 'login.html', {'error': 'Invalid credentials'})
-
     return render(request, 'login.html')
 
 def register_page(request):
@@ -85,7 +81,6 @@ def eventregister(request, event_id):
     
     if EventRegistration.objects.filter(user=request.user, event=event).exists():
         return redirect('eventlist')
-        
     events = Event.objects.filter(id=event_id)
         
     if request.method == 'POST':
