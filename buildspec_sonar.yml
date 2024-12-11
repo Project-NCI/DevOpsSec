@@ -1,9 +1,10 @@
 version: 0.2
 env:
-  SONARCLOUD_TOKEN: a52ea9c04ddc5718719a477dded1067f836d37eb
-  PROJECTKEY: Project-NCI_DevOpsSec
-  SONARCLOUD_ORG: project-nci
-  HOST: https://sonarcloud.io
+  variables:
+    SONARCLOUD_TOKEN: a52ea9c04ddc5718719a477dded1067f836d37eb
+    PROJECTKEY: Project-NCI_DevOpsSec
+    SONARCLOUD_ORG: project-nci
+    HOST: https://sonarcloud.io
 
 phases:
   install:
