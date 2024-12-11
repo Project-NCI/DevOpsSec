@@ -1,10 +1,10 @@
 version: 0.2
 env:
   secrets-manager:
-    SONARCLOUD_TOKEN: x23267801_SonarCred:SONAR_TOKEN
-    PROJECTKEY: x23267801_SonarCred:SONAR_PROJECT_KEY
-    SONARCLOUD_ORG: x23267801_SonarCred:SONAR_ORG_KEY
-    HOST: x23267801_SonarCred:HOST
+    SONARCLOUD_TOKEN: a52ea9c04ddc5718719a477dded1067f836d37eb
+    PROJECTKEY: Project-NCI_DevOpsSec
+    SONARCLOUD_ORG: project-nci
+    HOST: https://sonarcloud.io
 
 phases:
   install:
