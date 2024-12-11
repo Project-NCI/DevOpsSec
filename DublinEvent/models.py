@@ -17,7 +17,6 @@ class EventRegistration(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     mobile_no = models.CharField(
         max_length=10,
-        unique=True,
         validators=[
             RegexValidator(r'^\d{10}$', 'Enter a valid 10-digit mobile number.')
         ]

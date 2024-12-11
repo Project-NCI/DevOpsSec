@@ -23,7 +23,7 @@
             <form method="POST" class="d-flex flex-column justify-content-lg-center align-items-lg-center" style="width: 90%;">
             {% csrf_token %}
             <input type="text" style="margin-top: 10px;width: 90%;border-radius: 4px;font-size: 18px;padding-left: 10px;padding-right: 10px;border-width: 1.1px;border-color: rgba(0,0,0,0.44);" name="username" placeholder="Username" required="">
-            <input type="text" style="margin-top: 20px;width: 90%;border-radius: 4px;font-size: 18px;padding-left: 10px;padding-right: 10px;border-width: 1.1px;border-color: rgba(0,0,0,0.44);" name="pass" placeholder="Password" required="">
+            <input type="password" style="margin-top: 20px;width: 90%;border-radius: 4px;font-size: 18px;padding-left: 10px;padding-right: 10px;border-width: 1.1px;border-color: rgba(0,0,0,0.44);" name="pass" placeholder="Password" required="">
             <button class="btn btn-primary" type="submit" style="margin-top: 21px;width: 90%;">Sign In</button>
             </form>
             <p style="margin-top: 30px;margin-bottom: 0px;">New to Dublin Events? <a href="{% url 'register_page' %}">Click Here!</a></p>
